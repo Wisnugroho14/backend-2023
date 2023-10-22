@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class AnimalController extends Controller
 {
     // Property animals
-    public $animals = ["Beruang", "Bebek"];
+    public $animals = ["Beruang", "Bebek", "Ikan"];
 
     // Method untuk menampilkan semua hewan
     public function index(){
@@ -31,7 +31,7 @@ class AnimalController extends Controller
     }
 
     // Method untuk mengedit data hewan
-    public function update ($id, Request $request){
+    public function update(Request $request, $id){
         echo "Mengupdate data hewan id $id <br>";
 
         // Update data di property animals
@@ -42,7 +42,7 @@ class AnimalController extends Controller
     }
 
 
-    public function destroy ($id){
+    public function destroy($id){
         echo "Menghapus data hewan id $id <br>";
 
         unset($this->animals[$id]);
