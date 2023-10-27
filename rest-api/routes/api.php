@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\AnimalController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\AnimalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +32,9 @@ Route::put('/animals/{$id}', [AnimalController::class, "update"]);
 
 // Method delete untuk menghapus data hewan
 Route::delete('/animals/{$id}', [AnimalController::class, "destroy"]);
+
+// Membuat route untuk menampilkan semua siswa
+Route::get('/students', [StudentController::class, "index"]);
+
+// Menambahkan data siswa
+Route::post('/studentss', [StudentController::class, "store"]);
