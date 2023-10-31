@@ -47,7 +47,7 @@ class StudentController extends Controller
 
         $students = Student::create($input);
         $data = [
-            'message' => 'Student is created succesfully',
+            'message' => 'Data student berhasil dibuat',
             'data' => $students
         ];
 
@@ -77,6 +77,22 @@ class StudentController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $input = [
+            'nama' => $request ->nama,
+            'nim' => $request ->nim,
+            'email' => $request ->email,
+            'jurusan' => $request ->jurusan
+        ];
+
+        $students = Student::find($id);
+        $students -> update($input);
+
+        $data = [
+            'message' => "Data Student berhasil di update",
+            'data' => $students
+        ];
+
+        return response()-> json($data,200);
     }
 
     /**
@@ -85,5 +101,13 @@ class StudentController extends Controller
     public function destroy(string $id)
     {
         //
+        $students = Student::find($id);
+        $students->delete();
+
+        $data = [
+            'message' => 'ID: '. $id .' Data student berhasil di hapus',
+        ];
+
+        return response()->json($data,200);
     }
 }
