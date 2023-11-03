@@ -135,7 +135,7 @@ class StudentController extends Controller
             $data = [
                 'message' => 'Student not found'
             ];
-            return response()->json($data,400);
+            return response()->json($data,404);
         }
         
     }
@@ -162,7 +162,7 @@ class StudentController extends Controller
             $data = [
                 'message' => 'Student not found'
             ];
-            return response()->json($data,400);
+            return response()->json($data,404);
         }
     }
 }
