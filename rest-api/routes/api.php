@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AnimalController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,16 +35,22 @@ Route::put('/animals/{$id}', [AnimalController::class, "update"]);
 Route::delete('/animals/{$id}', [AnimalController::class, "destroy"]);
 
 // Membuat route untuk menampilkan semua siswa
-Route::get('/students', [StudentController::class, 'index']);
+Route::middleware(['auth:sanctum'])->group(function (){
+    Route::get('/students', [StudentController::class, 'index'])->middleware('auth:sanctum');
 
-// Menambahkan data siswa
-Route::post('/studentss', [StudentController::class, 'store']);
+    // Menambahkan data siswa
+    Route::post('/students', [StudentController::class, 'store']);
+    
+    // Mengupdate data siswa
+    Route::put('/students/{id}', [StudentController::class, 'update']);
+    
+    // Menghapus data siswa
+    Route::delete('/students/{id}', [StudentController::class, 'destroy']);
+    
+    // Mendapatkan detail data student 
+    Route::get('/students/{id}', [StudentController::class, 'show']);
+});  
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
 
-// Mengupdate data siswa
-Route::put('/students/{id}', [StudentController::class, 'update']);
 
-// Menghapus data siswa
-Route::delete('/students/{id}', [StudentController::class, 'destroy']);
-
-// Mendapatkan detail data student 
-Route::get('/students/{id}', [StudentController::class, 'show']);
