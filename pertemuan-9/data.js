@@ -1,4 +1,4 @@
-const fruits = ['Mangga', 'Jambu', 'Sirsak', 'Apel'];
+const fruits = ['Jeruk', 'Apel', 'Mangga', 'Durian'];
 
 //export data 
 module.exports = fruits;

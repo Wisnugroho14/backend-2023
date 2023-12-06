@@ -1,12 +1,18 @@
 //import method
-const {index, store} = require('./fruitController')
+const { index, store, update, destroy } = require("./fruitController");
 
 const main = () => {
   console.log(`Menampilkan data buah-buahan: `);
-  index()
+  index();
 
-  console.log('\n');
-  store('Alpukat')
-}
+  console.log(`\nMethod store - Menambahkan buah Pisang`);
+  store("Pisang");
 
-main()
+  console.log(`\nMethod update - Update data 0 menjadi Kelapa`);
+  update(0, "Kelapa");
+
+  console.log("\nMethod destroy - Menghapus data 0");
+  destroy(0);
+};
+
+main();
