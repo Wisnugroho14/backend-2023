@@ -12,6 +12,23 @@ class Student {
       });
     });
   }
+
+
+//Membuat create resource
+static create(data) {
+  data.created_at = new Date();
+  data.updated_at = new Date();
+  return new Promise((resolve, reject) => {
+    const query = "INSERT INTO students SET ?";
+    db.query(query, data, (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
 }
 
 //export class Student

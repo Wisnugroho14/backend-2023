@@ -19,17 +19,22 @@ class StudentController {
     res.json(data);
   }
 
-  store(req, res) {
+  //menambahkan keyword Async memberitahu proses Asynchronous
+  async store(req, res) {
     // TODO 5: Tambahkan data students
     // code here
-    const { nama } = req.body;
-    students.push(nama);
+    const students = await Student.create(req.body);
 
     const data = {
-      message: `Menambahkan data student: ${nama}`,
-      data: students,
+      message: "Menambahkan data student",
+      data: {
+        nama: req.body.nama,
+        nim: req.body.nim,
+        email: req.body.email,
+        jurusan: req.body.jurusan,
+      },
     };
-
+    
     res.json(data);
   }
 
