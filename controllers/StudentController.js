@@ -1,9 +1,14 @@
 // TODO 3: Import data students dari folder data/students.js
 // code here
+//import model Student
+const Student = require('../models/Student');
 
 // Membuat Class StudentController
 class StudentController {
-  index(req, res) {
+  //menambahkan keyword Async memberitahu proses Asynchronous
+  async index(req, res) {
+    //memanggil method static all dengan async await
+    const students = await Student.all();
     // TODO 4: Tampilkan data students
     // code here
     const data = {
