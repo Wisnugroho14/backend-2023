@@ -21,53 +21,84 @@ class StudentController {
 
   //menambahkan keyword Async memberitahu proses Asynchronous
   async store(req, res) {
-    // TODO 5: Tambahkan data students
+    // TODO 5: Tambahkan (create) data students
     // code here
     const students = await Student.create(req.body);
 
     const data = {
-      message: "Menambahkan data student",
-      data: {
-        nama: req.body.nama,
-        nim: req.body.nim,
-        email: req.body.email,
-        jurusan: req.body.jurusan,
-      },
+      message: "Menambahkan data students",
+      data: students,
     };
     
     res.json(data);
   }
 
-  update(req, res) {
+  async update(req, res) {
     // TODO 6: Update data students
     // code here
     const { id } = req.params;
-    const { nama } = req.body;
-    students[id] = nama;
+    const students = await Student.find(id);
 
-    const data = {
-      message: `Mengedit student id ${id}, nama ${nama}`,
-      data: students,
-    };
-
-    res.json(data);
+    if (students) {
+      //melakukan update data students
+      const students = await Student.update(id, req.body);
+      const data = {
+        message: `Mengedit data students`,
+        data: students,
+      };
+      res.status(200).json(data);
+    } else {
+      const data = {
+        message : `Student not found`,
+      };
+      res.status(404).json(data);
+    }
   }
 
-  destroy(req, res) {
+  async destroy(req, res) {
     // TODO 7: Hapus data students
     // code here
     const { id } = req.params;
-    students.splice(id, 1);
+   const students = await Student.find(id);
 
+   if (students) {
+    await Student.delete(id);
     const data = {
-      message: `Menghapus data student id ${id}`,
-      data: students,
+      message: `Menghapus data student`,
     };
-    
-    res.json(data);
+
+    res.status(200).json(data);
+   } else {
+    const data = {
+      message: `Student not found`,
+   };
+
+   res.status(404).json(data);
   }
 }
 
+  async show(req,res) {
+    const {id} = req.params;
+    //cari id student berdasarkan id
+    const students = await Student.find(id);
+
+    if (student) {
+      const data = {
+        message: `Menampilkan detail student`,
+        data: student,
+      };
+
+      res.status(200).json(data);
+    }
+    else {
+      const data = {
+        message: `Student not found`, 
+      };
+
+      res.status(404).json(data);
+    }
+  }
+}
 // Membuat object StudentController
 const object = new StudentController();
 
